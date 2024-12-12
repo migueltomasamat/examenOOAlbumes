@@ -1,23 +1,24 @@
 DELIMITER //
-drop table if exists estudiante cascade;
-drop table if exists expediente cascade;
+drop table if exists album cascade;
+drop table if exists fotografia cascade;
 //
 
-create table estudiante(
-    nia integer,
+create table album(
+    uuid varchar(36),
     nombre varchar(100),
-    correo varchar(255),
-    ref_expediente varchar(10)
+    fecha_lanzamiento date,
+    id_fotografia varchar(10)
 );
 //
-create table expediente(
-    referencia varchar(10),
-    contenido varchar(1000),
-    fecha_modificacion date
+create table fotografia(
+    uuid varchar(36),
+    nombre varchar(255),
+    ruta varchar(255),
+    contenido varchar(1000)
 );
 //
 
-alter table estudiante add constraint pk_estudiante primary key (nia);
-alter table expediente add constraint pk_expediente primary key (referencia);
+alter table album add constraint pk_album primary key (uuid);
+alter table fotografia add constraint pk_fotografia primary key (uuid);
 //
-alter table estudiante add constraint fk_estudiante_expediente foreign key (ref_expediente) references expediente(referencia);
+alter table album add constraint fk_album_fotografia foreign key (id_fotografia) references fotografia(uuid);
